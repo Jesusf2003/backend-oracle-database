@@ -1,15 +1,12 @@
 package com.backend.controller;
 
 import com.backend.entity.Persona;
-import com.backend.entity.PersonaRepository;
 import com.backend.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @RestController

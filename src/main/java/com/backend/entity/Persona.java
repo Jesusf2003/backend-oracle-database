@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -15,31 +13,17 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "persona", schema = "developer_01")
 public class Persona {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "identificador")
-    private Long identificador;
-    @Column(name = "nombres")
-    private String nombres;
-    @Column(name = "apellidos")
-    private String apellidos;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Column(name = "fecha_nacimiento")
-    private Timestamp fechaNacimiento;
-    @Column(name = "tipo_documento")
-    private String tipoDocumento;
-    @Column(name = "numero_documento")
-    private String numeroDocumento;
-    @Column(name = "correo_electronico")
-    private String correoElectronico;
-    @Column(name = "celular")
-    private String celular;
-    @Column(name = "usuario")
-    private String usuario;
-    @Column(name = "contrasena")
-    private String contrasena;
-    @Column(name = "rol")
-    private String rol;
-    @Column(name = "estado")
-    private String estado;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "identificador") private Long identificador;
+    @Column(name = "nombres") private String nombres;
+    @Column(name = "apellidos") private String apellidos;
+    @Column(name = "fecha_nacimiento") private Date fechaNacimiento;
+    @Column(name = "tipo_documento") private String tipoDocumento;
+    @Column(name = "numero_documento") private String numeroDocumento;
+    @Column(name = "correo_electronico") private String correoElectronico;
+    @Column(name = "celular") private String celular;
+    @Column(name = "usuario") private String usuario;
+    @Column(name = "contrasena") private String contrasena;
+    @Column(name = "rol") private String rol;
+    @Column(name = "estado") private String estado;
 }
