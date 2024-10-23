@@ -1,11 +1,9 @@
-package com.backend.entity;
+package com.backend.entity.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @Entity
@@ -18,14 +16,12 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "identificador")
     private Long identificador;
-    @Column(name = "fecha_inscripcion")
-    private Date fechaInscripcion;
     @Column(name = "carrera_identificador")
     private String carreraIdentificador;
-    @Column(name = "persona_identificador")
-    private Long personaIdentificador;
-    @Column(name = "ciclo_identificador")
-    private Long cicloIdentificador;
+    @ManyToOne @JoinColumn(name = "persona_identificador")
+    private Persona personaIdentificador;
+    @ManyToOne @JoinColumn(name = "ciclo_identificador")
+    private Ciclo cicloIdentificador;
     @Column(name = "estado")
     private String estado;
 }

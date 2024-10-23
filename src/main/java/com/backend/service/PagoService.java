@@ -1,7 +1,9 @@
 package com.backend.service;
 
-import com.backend.entity.model.Persona;
-import com.backend.entity.PersonaRepository;
+import com.backend.entity.InscripcionRepository;
+import com.backend.entity.model.Inscripcion;
+import com.backend.entity.model.Pago;
+import com.backend.entity.PagoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,26 +13,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonaService {
+public class PagoService {
 
     @Autowired
-    private PersonaRepository repo;
+    private PagoRepository repo;
+    @Autowired
+    private InscripcionRepository repoInscripcion;
 
-    public List<Persona> getAllPersonas() {
+    public List<Pago> getAllPagos() {
         return repo.findAll();
     }
 
-    public ResponseEntity<Persona> save(Persona data) {
-        data.setRol("EST");
+    public ResponseEntity<Pago> save(Pago data) {
         data.setEstado("A");
         return new ResponseEntity<>(repo.save(data), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Persona> update(Long id, Persona data) {
-        Optional<Persona> opt = repo.findById(id);
+    public ResponseEntity<Pago> update(Long id, Pago data) {
+        Optional<Pago> opt = repo.findById(id);
         if (opt.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        Persona _entity = opt.get();
-        _entity.setRol(data.getRol());
+        Pago _entity = opt.get();
+        _entity.setIdentificadorInscripcion(data.getIdentificadorInscripcion());
         return new ResponseEntity<>(repo.save(_entity), HttpStatus.OK);
     }
 

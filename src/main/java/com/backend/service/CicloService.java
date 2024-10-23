@@ -1,7 +1,7 @@
 package com.backend.service;
 
-import com.backend.entity.model.Persona;
-import com.backend.entity.PersonaRepository;
+import com.backend.entity.model.Ciclo;
+import com.backend.entity.CicloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,26 +11,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonaService {
+public class CicloService {
 
     @Autowired
-    private PersonaRepository repo;
+    private CicloRepository repo;
 
-    public List<Persona> getAllPersonas() {
+    public List<Ciclo> getAllCiclos() {
         return repo.findAll();
     }
 
-    public ResponseEntity<Persona> save(Persona data) {
-        data.setRol("EST");
-        data.setEstado("A");
+    public ResponseEntity<Ciclo> save(Ciclo data) {
         return new ResponseEntity<>(repo.save(data), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Persona> update(Long id, Persona data) {
-        Optional<Persona> opt = repo.findById(id);
+    public ResponseEntity<Ciclo> update(Long id, Ciclo data) {
+        Optional<Ciclo> opt = repo.findById(id);
         if (opt.isEmpty()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        Persona _entity = opt.get();
-        _entity.setRol(data.getRol());
+        Ciclo _entity = opt.get();
+        _entity.setNombre(data.getNombre());
+        _entity.setFechaInicio(data.getFechaInicio());
+        _entity.setFechaFin(data.getFechaFin());
         return new ResponseEntity<>(repo.save(_entity), HttpStatus.OK);
     }
 

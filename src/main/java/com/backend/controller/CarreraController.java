@@ -1,7 +1,7 @@
 package com.backend.controller;
 
-import com.backend.entity.model.Persona;
-import com.backend.service.PersonaService;
+import com.backend.entity.model.Carrera;
+import com.backend.service.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/persona")
-public class PersonaController {
+@RequestMapping("/carrera")
+public class CarreraController {
 
     @Autowired
-    private PersonaService service;
+    private CarreraService service;
 
     @GetMapping
-    public ResponseEntity<List<Persona>> findAll() {
-        return ResponseEntity.ok(service.getAllPersonas());
+    public ResponseEntity<List<Carrera>> findAll() {
+        return ResponseEntity.ok(service.getAllCarreras());
     }
 
     @PostMapping
-    public ResponseEntity<Persona> save(@RequestBody Persona data) {
+    public ResponseEntity<Carrera> save(@RequestBody Carrera data) {
         return service.save(data);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Persona> update(@PathVariable("id") Long id,  @RequestBody Persona data) {
+    public ResponseEntity<Carrera> update(@PathVariable("id") String id, @RequestBody Carrera data) {
         return service.update(id, data);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+    public ResponseEntity<?> remove(@PathVariable("id") String id) {
         service.remove(id);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }

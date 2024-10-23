@@ -1,7 +1,7 @@
 package com.backend.controller;
 
-import com.backend.entity.model.Persona;
-import com.backend.service.PersonaService;
+import com.backend.entity.model.Inscripcion;
+import com.backend.service.InscripcionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/persona")
-public class PersonaController {
+@RequestMapping("/inscripcion")
+public class InscripcionController {
 
     @Autowired
-    private PersonaService service;
+    private InscripcionService service;
 
     @GetMapping
-    public ResponseEntity<List<Persona>> findAll() {
-        return ResponseEntity.ok(service.getAllPersonas());
+    public ResponseEntity<List<Inscripcion>> findAll() {
+        return ResponseEntity.ok(service.getAllInscripciones());
     }
 
     @PostMapping
-    public ResponseEntity<Persona> save(@RequestBody Persona data) {
+    public ResponseEntity<Inscripcion> save(@RequestBody Inscripcion data) {
         return service.save(data);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Persona> update(@PathVariable("id") Long id,  @RequestBody Persona data) {
+    public ResponseEntity<Inscripcion> update(@PathVariable("id") Long id, @RequestBody Inscripcion data) {
         return service.update(id, data);
     }
 
