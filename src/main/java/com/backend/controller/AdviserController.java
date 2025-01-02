@@ -1,7 +1,7 @@
 package com.backend.controller;
 
-import com.backend.entity.model.Inscripcion;
-import com.backend.service.InscripcionService;
+import com.backend.entity.model.Adviser;
+import com.backend.service.AdviserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,25 +10,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inscripcion")
+@RequestMapping("/adviser")
 @CrossOrigin("*")
-public class InscripcionController {
+public class AdviserController {
 
     @Autowired
-    private InscripcionService service;
+    private AdviserService service;
 
     @GetMapping
-    public ResponseEntity<List<Inscripcion>> findAll() {
-        return ResponseEntity.ok(service.getAllInscripciones());
+    public ResponseEntity<List<Adviser>> findAll() {
+        return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Adviser> findById(Long id) {
+        return service.findById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Inscripcion> save(@RequestBody Inscripcion data) {
+    private ResponseEntity<Adviser> save(@RequestBody Adviser data) {
         return service.save(data);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Inscripcion> update(@PathVariable("id") Long id, @RequestBody Inscripcion data) {
+    public ResponseEntity<Adviser> update(@PathVariable("id") Long id, @RequestBody Adviser data) {
         return service.update(id, data);
     }
 

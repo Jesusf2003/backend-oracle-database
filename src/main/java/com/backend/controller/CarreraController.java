@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/carrera")
+@CrossOrigin("*")
 public class CarreraController {
 
     @Autowired

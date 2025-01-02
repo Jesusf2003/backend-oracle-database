@@ -583,3 +583,62 @@ CREATE TABLE developer_02.pago_detalle3
     CONSTRAINT pk_pago_detalle12 PRIMARY KEY(identificador)
 );
 */
+
+CREATE TABLE datasoft.adviser
+(
+    id                      integer generated always as identity,
+    registration_date       timestamp default systimestamp,
+    names                   varchar2(60)  not null,
+    surnames                varchar2(100) not null,
+    identification_document char(3)       NOT NULL,
+    document_number         varchar(20)   NOT NULL,
+    email                   varchar(60)   NOT NULL,
+    cellphone               char(9)       NOT NULL,
+    state                   char(1)       NOT NULL,
+    CONSTRAINT adviser_pk PRIMARY KEY (id)
+);
+
+-- Table: applicant
+CREATE TABLE datasoft.applicant (
+id integer generated always as identity,
+registration_date timestamp default systimestamp,
+names varchar2(60) NOT NULL,
+surnames varchar2(100) NOT NULL,
+sex char(1) NOT NULL,
+identification_document char(3) NOT NULL,
+document_number varchar2(20) NOT NULL,
+email varchar2(120) NULL,
+cellphone char(9) NOT NULL,
+state char(1) NOT NULL,
+CONSTRAINT applicant_pk PRIMARY KEY (id)
+);
+
+-- Table: consultation
+CREATE TABLE datasoft.consultation (
+id integer generated always as identity PRIMARY KEY,
+query_date timestamp NOT NULL,
+applicant integer NOT NULL,
+career char(3) NOT NULL,
+query varchar2(400) NOT NULL,
+adviser integer NOT NULL,
+answer varchar2(500) NOT NULL,
+state char(1) NOT NULL
+);
+ALTER TABLE datasoft.consultation ADD CONSTRAINT fk_adviser_consultation FOREIGN KEY (adviser)
+    REFERENCES datasoft.adviser (id);
+ALTER TABLE datasoft.consultation ADD CONSTRAINT fk_applicant_consultation FOREIGN KEY (applicant)
+    REFERENCES datasoft.applicant (id);
+ALTER TABLE datasoft.consultation ADD CONSTRAINT fk_career_consultation FOREIGN KEY (career)
+    REFERENCES datasoft.carrera (identificador);
+
+INSERT INTO datasoft.consultation (query_date, applicant, career, query, adviser, answer, state)
+VALUES (TO_DATE('28/12/2024', 'DD/MM/YYYY'), 9, 'EMA', '¿Cómo puedo cambiar de asesor académico?', 1, 'Puedes solicitar el cambio desde tu portal académico.', 'A');
+
+---
+SELECT s.sid, s.serial#, s.username, s.machine, l.locked_mode
+FROM v$locked_object l
+         JOIN dba_objects o ON l.object_id = o.object_id
+         JOIN v$session s ON l.session_id = s.sid
+WHERE o.object_name IN ('CONSULTATION', 'APPLICANT') AND o.owner = 'DATASOFT';
+ALTER SYSTEM KILL SESSION '616,10897';
+---

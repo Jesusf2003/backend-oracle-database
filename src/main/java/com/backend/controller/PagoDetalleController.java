@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pago-detalle")
+@CrossOrigin("*")
 public class PagoDetalleController {
 
     @Autowired

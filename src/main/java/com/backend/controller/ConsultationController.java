@@ -1,7 +1,7 @@
 package com.backend.controller;
 
-import com.backend.entity.model.Inscripcion;
-import com.backend.service.InscripcionService;
+import com.backend.entity.model.Consultation;
+import com.backend.service.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,31 +10,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inscripcion")
+@RequestMapping("/consultation")
 @CrossOrigin("*")
-public class InscripcionController {
+public class ConsultationController {
 
     @Autowired
-    private InscripcionService service;
+    private ConsultationService service;
 
     @GetMapping
-    public ResponseEntity<List<Inscripcion>> findAll() {
-        return ResponseEntity.ok(service.getAllInscripciones());
+    public ResponseEntity<List<Consultation>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Inscripcion> save(@RequestBody Inscripcion data) {
+    public ResponseEntity<Consultation> save(@RequestBody Consultation data) {
         return service.save(data);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Inscripcion> update(@PathVariable("id") Long id, @RequestBody Inscripcion data) {
+    public ResponseEntity<Consultation> update(@PathVariable("id") Long id, @RequestBody Consultation data) {
         return service.update(id, data);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remove(@PathVariable("id") Long id) {
-        service.remove(id);
+        service.deleteData(id);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }
